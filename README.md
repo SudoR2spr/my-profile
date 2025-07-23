@@ -1,6 +1,6 @@
 # my-profile
 
-Demo link [🖇️ My Profile] (https://sudor2spr.github.io/my-profile/)
+Demo link [🖇️ My Profile](https://sudor2spr.github.io/my-profile)
 
 
 If you want to add more extract channel buttons, 
