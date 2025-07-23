@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="WOODcraft SudoR2spr" />
+    <meta name="keywords" content="WDZONE, Profile group channel list" />
+    <meta name="description" content="WDZONE Website site Profile group channel list" />
+    <meta property="og:description" content="WDZONE Website Profile group channel list." />
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/PZvwfV8d/mage-sister-dp.jpg">
+    <meta property="og:image" content="https://i.ibb.co/j9n6nZxD/Op-log.png">
+    <title>Profile group channel list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 15px;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            padding: 0 15px;
+        }
+        
+        .header h1 {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-top: 15px;
+        }
+        
+        .channel-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(to right, #4A00E0, #8E2DE2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            font-size: 1rem;
+        }
+        
+        .channel-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #8E2DE2, #4A00E0);
+        }
+        
+        .channel-name {
+            margin-top: 15px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        
+        .card-container {
+            perspective: 1500px;
+            height: 500px; /* Increased height for bio visibility */
+            width: 100%;
+            max-width: 330px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            flex: 1;
+        }
+        
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .card-front {
+            background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+        }
+        
+        .card-back {
+            background: linear-gradient(135deg, #141E30, #243B55);
+            transform: rotateY(180deg);
+            padding: 20px;
+            justify-content: space-around;
+        }
+        
+        .btn-3d {
+            padding: 16px 35px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(to bottom, #FFD700, #FFA500);
+            border: none;
+            border-radius: 50px;
+            color: #4A235A;
+            cursor: pointer;
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), 
+                        0 8px 8px rgba(0, 0, 0, 0.3),
+                        inset 0 -4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            width: 90%;
+            max-width: 260px;
+        }
+        
+        .btn-3d:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+            z-index: -1;
+        }
+        
+        .btn-3d:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 
+                        0 10px 10px rgba(0, 0, 0, 0.3),
+                        inset 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 
+                        0 3px 3px rgba(0, 0, 0, 0.2),
+                        inset 0 -1px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            margin: 5px 0 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .profile-img::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: conic-gradient(
+                #FFD700, #FF8C00, #FF4500, #FF8C00, #FFD700
+            );
+            border-radius: 50%;
+            animation: rotate 3s linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .user-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #FFD700;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+        }
+        
+        .user-title {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            color: #00c6ff;
+        }
+        
+        .user-bio {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 150px;
+            padding: 5px;
+            width: 100%;
+        }
+        
+        .user-bio::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .user-bio::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        
+        .user-bio::-webkit-scrollbar-thumb {
+            background: #FFD700;
+            border-radius: 10px;
+        }
+        
+        .user-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 25px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.3);
+            font-size: 0.95rem;
+            margin: 5px 0;
+        }
+        
+        .user-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+        }
+        
+        .card-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        .photo-link, .btn-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 130px;
+            max-width: 160px;
+        }
+        
+        .photo-link {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 176, 155, 0.3);
+        }
+        
+        .btn-link {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+        }
+        
+        .photo-link:hover, .btn-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        
+        .developer {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .developer a {
+            color: #FFD700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .developer a:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .header h1 {
+                font-size: 2.1rem;
+            }
+            
+            .card-container {
+                max-width: 300px;
+                height: 480px;
+            }
+            
+            .btn-3d {
+                padding: 14px 30px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card-container {
+                max-width: 100%;
+                width: 100%;
+                max-width: 420px;
+                height: 450px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1.05rem;
+            }
+            
+            .channel-name {
+                font-size: 1.5rem;
+            }
+            
+            .btn-3d {
+                padding: 15px 30px;
+                font-size: 1.25rem;
+            }
+            
+            .card-back {
+                padding: 20px 15px;
+            }
+            
+            .profile-img {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 12px;
+            }
+            
+            .user-name {
+                font-size: 1.4rem;
+            }
+            
+            .user-bio {
+                font-size: 0.95rem;
+                margin-bottom: 12px;
+                max-height: 120px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 25px 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .header p {
+                font-size: 0.95rem;
+            }
+            
+            .channel-name {
+                font-size: 1.3rem;
+            }
+            
+            .channel-link {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+            
+            .btn-3d {
+                padding: 14px 25px;
+                font-size: 1.15rem;
+                max-width: 240px;
+            }
+            
+            .profile-img {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .user-name {
+                font-size: 1.3rem;
+            }
+            
+            .user-title {
+                font-size: 0.95rem;
+                margin-bottom: 10px;
+            }
+            
+            .user-bio {
+                font-size: 0.9rem;
+                max-height: 110px;
+            }
+            
+            .user-link {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .card-links {
+                gap: 10px;
+                margin-top: 12px;
+            }
+            
+            .photo-link, .btn-link {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+                min-width: 120px;
+            }
+            
+            .developer {
+                font-size: 1rem;
+            }
+            
+            .copyright {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .btn-3d {
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
+            
+            .card-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .photo-link, .btn-link {
+                max-width: 200px;
+                width: 100%;
+            }
+            
+            .card-container {
+                height: 470px;
+            }
+            
+            .user-bio {
+                max-height: 130px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="channel-name">
+            ❖ 𝐖𝐃 𝐙𝐎𝐍𝐄 ❖ ™
+        </div>
+        <h1>My Profile group channel list</h1>
+        <p>Click on any button group and channel reveal profile details.</p>
+        
+        <a href="https://t.me/Opleech_WD" class="channel-link" target="_blank">
+            <i class="fab fa-telegram"></i> Join Our Telegram Channel
+        </a>
+    </div>
+    
+    <div class="container">
+        <!-- Profile -->
+        <div class="card-container">
+            <div class="card">
+                <div class="card-face card-front">
+                    <button class="btn-3d">My Profile</button>
+                </div>
+                <div class="card-face card-back">
+                    <div class="profile-img">
+                        <img src="https://i.ibb.co/Nn74Wwdb/Woodcraft.jpg" alt="Profile">
+                    </div>
+                    <h3 class="user-name">Farooq Shaikh</h3>
+                    <div class="user-title">Telegram Community Owner</div>
+                    <p class="user-bio">
+    🏠 Interior Decoration & Plywood Furniture Specialist<br>
+    🎨 Transforming spaces with creative and elegant designs<br>
+    🪑 Custom-made modern furniture crafted with precision<br>
+    🛠️ Quality craftsmanship, attention to detail, and on-time delivery<br>
+    📍 Experienced in homes, offices, and commercial projects<br>
+    📞 DM to discuss your project and get a free consultation!
+                    </p>
+                    <a href="https://t.me/Farooq_is_king" class="user-link">
+                        <i class="fab fa-telegram"></i> Contact Me
+                    </a>
+                </div>
+            </div>
+            <div class="card-links">
+                <a href="https://i.ibb.co/Nn74Wwdb/Woodcraft.jpg" class="photo-link">
+                    <i class="fas fa-image"></i> Profile Photo
+                </a>
+                <a href="https://t.me/Farooq_is_king" class="btn-link">
+                    <i class="fas fa-user"></i> My Profile
+                </a>
+            </div>
+        </div>
+        
+        <!-- Channel -->
+        <div class="card-container">
+            <div class="card">
+                <div class="card-face card-front">
+                    <button class="btn-3d">Telegram Channel</button>
+                </div>
+                <div class="card-face card-back">
+                    <div class="profile-img">
+                        <img src="https://i.ibb.co/j9n6nZxD/Op-log.png" alt="Channel">
+                    </div>
+                    <h3 class="user-name">WD ZONE Channel</h3>
+                    <div class="user-title">Premium Web Design Resources</div>
+                    <p class="user-bio">Get Free web design resources, premium templates, UI kits, and design inspiration. Join our growing community of designers and developers for daily updates and exclusive content.</p>
+                    <a href="https://t.me/Opleech_WD" class="user-link">
+                        <i class="fab fa-telegram"></i> Join Channel
+                    </a>
+                </div>
+            </div>
+            <div class="card-links">
+                <a href="https://i.ibb.co/j9n6nZxD/Op-log.png" class="photo-link">
+                    <i class="fas fa-image"></i> Channel Logo
+                </a>
+                <a href="https://t.me/Opleech_WD" class="btn-link">
+                    <i class="fab fa-telegram"></i> Channel Link
+                </a>
+            </div>
+        </div>
+        
+        <!-- Group -->
+        <div class="card-container">
+            <div class="card">
+                <div class="card-face card-front">
+                    <button class="btn-3d">Telegram Group</button>
+                </div>
+                <div class="card-face card-back">
+                    <div class="profile-img">
+                        <img src="https://i.ibb.co/PZvwfV8d/mage-sister-dp.jpg" alt="Group">
+                    </div>
+                    <h3 class="user-name">WD ZONE Community</h3>
+                    <div class="user-title">Web Designers Community</div>
+                    <p class="user-bio">Join our active community of web designers and developers. Get help, share your work, and collaborate with fellow designers. We host weekly challenges, Q&A sessions, and provide feedback on projects.</p>
+                    <a href="https://t.me/+U41ug0FZw2gxMzM1" class="user-link">
+                        <i class="fab fa-telegram"></i> Join Group
+                    </a>
+                </div>
+            </div>
+            <div class="card-links">
+                <a href="https://i.ibb.co/PZvwfV8d/mage-sister-dp.jpg" class="photo-link">
+                    <i class="fas fa-image"></i> Group Photo
+                </a>
+                <a href="https://t.me/+U41ug0FZw2gxMzM1" class="btn-link">
+                    <i class="fab fa-telegram"></i> Group Link
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <div class="developer">
+            Developed by <a href="https://t.me/Farooq_is_king">Farooq Shaikh</a>
+            for <a href="https://t.me/Opleech_WD">❖ 𝐖𝐃 𝐙𝐎𝐍𝐄 ❖ ™</a>
+        </div>
+        <div class="copyright">
+            Copyright © 2025 - All Rights Reserved
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('flipped');
+                });
+            });
+            
+            // Prevent button click from triggering card flip
+            const buttons = document.querySelectorAll('.btn-3d');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.closest('.card').classList.toggle('flipped');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
